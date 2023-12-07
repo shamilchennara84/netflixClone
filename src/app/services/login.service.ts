@@ -9,7 +9,14 @@ export class LoginService {
   login(email: string, password: string) {
     //backend api
     //as this is just a clone project we are not connecting backend
-    //in real project we will get a token from backend which will be stored in localStorage
+    //in a complete project we will get a token from backend which will be stored in localStorage
     localStorage.setItem('token', Math.random() + '');
+  }
+
+  isLoggedIn(){
+    if(localStorage.getItem('token')){
+      return true
+    }
+    return false
   }
 }

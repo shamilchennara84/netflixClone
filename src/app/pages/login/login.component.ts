@@ -4,6 +4,7 @@ import { BIG_IMG_URL, LOGO_URL } from '../../constants/config';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,24 +19,27 @@ export class LoginComponent {
 
   email!: string;
   password!: string;
-  LoginService = inject(LoginService)
-  router = inject(Router)
+  LoginService = inject(LoginService);
+  router = inject(Router);
+  toasterService = inject(ToastrService);
 
+  ngOnInit(){
+    if(this.LoginService.isLoggedIn()){
+      this.router.navigateByUrl('/browser');
+    }
+  }
 
   signIn() {
     if (!this.email || !this.password) {
-      alert('provide email or password');
+      
+      this.toasterService.error("provide email or password")
+      
       return;
     }
     //if email and pass are correct
-    this.LoginService.login(this.email,this.password)
+    this.LoginService.login(this.email, this.password);
+    this.toasterService.success('logged in successfully');
 
     this.router.navigateByUrl('/browser');
-
-
   }
-
-
-
-
 }
