@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Movie } from '../../types/movies';
+import { tmbdConfig } from '../../constants/config';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,8 +12,6 @@ import { Movie } from '../../types/movies';
 export class MovieCardComponent {
   @Input() movie!: Movie;
 
-  ngOnInit(){
-    console.log("hello");
-    console.log(this.movie);
-  };
+  imgPath = tmbdConfig.imgPath
+
 }
